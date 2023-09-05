@@ -3,7 +3,6 @@
 #include <algorithm>
 #include <cassert>
 #include <iostream>
-#include <vector>
 #include <random>
 
 // CUDA kernel for two vectors addition
@@ -46,7 +45,7 @@ void showSamples(int* vec){
 
 int main() {
     // Array size of 2^24 (16777216 elements)
-    constexpr unsigned long long N = 1 << 24;
+    constexpr int N = 1 << 24;
     constexpr size_t b_size = sizeof(int) * N;
 
     // GPU id
@@ -86,7 +85,7 @@ int main() {
     // Blocks number
     int NUM_BLOCKS = static_cast<int>((N + NUM_THREADS - 1) / NUM_THREADS);
 
-    // inform GPU it will need those (only Linux)
+    // inform GPU it will need those (works only for Linux)
 //    err = cudaMemPrefetchAsync(dataA, b_size, gpuID);
 //    if (err != cudaSuccess) {
 //        std::cout << "Error when prefetch: " << cudaGetErrorString(err) << std::endl;
